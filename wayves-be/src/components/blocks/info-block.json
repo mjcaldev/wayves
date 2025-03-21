@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_blocks_info_blocks",
+  "info": {
+    "displayName": "info-block"
+  },
+  "options": {},
+  "attributes": {
+    "reversed": {
+      "type": "boolean",
+      "default": false
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "headline": {
+      "type": "string"
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.link"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "turquoise",
+        "orange"
+      ]
+    }
+  }
+}
