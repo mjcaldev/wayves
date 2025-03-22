@@ -32,11 +32,13 @@ export interface BlocksInfoBlock extends Struct.ComponentSchema {
 export interface ElementsLink extends Struct.ComponentSchema {
   collectionName: 'components_elements_links';
   info: {
+    description: '';
     displayName: 'Link';
   };
   attributes: {
     href: Schema.Attribute.String;
     isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    text: Schema.Attribute.String;
   };
 }
 
