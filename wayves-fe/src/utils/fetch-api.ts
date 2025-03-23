@@ -24,6 +24,7 @@ export async function fetchAPI(url: string, options: FetchAPIOptions) {
   };
 
   try {
+    console.log(`Making ${method} request to ${url} with options:`, headers);
     const response = await fetch(url, headers);
     const contentType = response.headers.get("content-type");
     if (
@@ -33,6 +34,7 @@ export async function fetchAPI(url: string, options: FetchAPIOptions) {
     ) {
       return await response.json();
     } else {
+      console.error(`Request failed with status ${response.status} ${response.statusText}`);
       return { status: response.status, statusText: response.statusText };
     }
   } catch (error) {
