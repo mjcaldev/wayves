@@ -3,7 +3,8 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface BlocksHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_hero_sections';
   info: {
-    displayName: 'Hero-section';
+    description: '';
+    displayName: 'hero-section';
   };
   attributes: {
     cta: Schema.Attribute.Component<'elements.link', false>;
