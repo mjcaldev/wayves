@@ -18,10 +18,11 @@ export interface BlocksHeroSection extends Struct.ComponentSchema {
 export interface BlocksInfoBlock extends Struct.ComponentSchema {
   collectionName: 'components_blocks_info_blocks';
   info: {
+    description: '';
     displayName: 'info-block';
   };
   attributes: {
-    content: Schema.Attribute.Blocks;
+    content: Schema.Attribute.RichText;
     cta: Schema.Attribute.Component<'elements.link', false>;
     headline: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images'>;
