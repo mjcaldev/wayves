@@ -10,7 +10,10 @@ interface FetchAPIOptions {
   next?: NextFetchRequestConfig;
 }
 
-export async function fetchAPI(url: string, options: FetchAPIOptions) {
+export async function fetchAPI<T = unknown>(
+  url: string,
+  options: FetchAPIOptions
+): Promise<T> {
   const { method, authToken, body, next } = options;
 
   const headers: RequestInit & { next?: NextFetchRequestConfig } = {
@@ -24,21 +27,21 @@ export async function fetchAPI(url: string, options: FetchAPIOptions) {
   };
 
   try {
-    console.log(`Making ${method} request to ${url} with options:`, headers);
     const response = await fetch(url, headers);
-    const contentType = response.headers.get("content-type");
-    if (
-      contentType &&
-      contentType.includes("application/json") &&
-      response.ok
-    ) {
-      return await response.json();
-    } else {
-      console.error(`Request failed with status ${response.status} ${response.statusText}`);
-      return { status: response.status, statusText: response.statusText };
+    if (!response.ok) {
+      throw new Error(
+        `Request to ${url} failed with status ${response.status} ${response.statusText}`
+      );
     }
+
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    }
+
+    return (await response.text()) as T;
   } catch (error) {
-    console.error(`Error ${method} data:`, error);
+    console.error(`Error fetching ${method} ${url}:`, error);
     throw error;
   }
 }
