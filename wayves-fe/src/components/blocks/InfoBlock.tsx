@@ -12,7 +12,7 @@ export function InfoBlock({
   cta,
 }: Readonly<InfoBlockProps>) {
   return (
-    <section className={`info info--${theme} ${reversed && "info--reversed"}`}>
+    <section className={`info info--${theme} ${reversed ? "info--reversed" : ""}`}>
       <StrapiImage
         src={image.url}
         alt={image.alternativeText || "No alternative text provided"}

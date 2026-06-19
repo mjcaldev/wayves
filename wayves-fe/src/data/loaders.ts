@@ -1,6 +1,17 @@
 import qs from "qs";
 import { fetchAPI } from "@/utils/fetch-api";
 import { getStrapiURL } from "@/utils/get-strapi-url";
+import type { Block } from "@/types";
+
+interface HomePageResponse {
+  data: {
+    id: number;
+    documentId: string;
+    title?: string;
+    description?: string;
+    blocks?: Block[];
+  };
+}
 
 const homePageQuery = qs.stringify(
   {
@@ -43,9 +54,8 @@ export async function getHomePage() {
   const url = new URL(path, BASE_URL);
   url.search = homePageQuery;
 
-  console.log(`Fetching home page data from ${url.href}`);
-
-  return await fetchAPI(url.href, {method: "GET"});
-
-
+  return await fetchAPI<HomePageResponse>(url.href, {
+    method: "GET",
+    next: { tags: ["home"] },
+  });
 }
